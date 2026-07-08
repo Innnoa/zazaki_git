@@ -51,31 +51,27 @@ struct App {
     std::string status_line;
 };
 
-inline ftxui::Element StatusBar(const std::string& repo_path,
-                                 int tab_index,
-                                 const std::string& status_line) {
+inline ftxui::Element KeyHintBar(int tab_index, const std::string& repo_path) {
     using namespace ftxui;
 
-    std::vector<std::string> tab_names = {
-        "Status", "Staging", "Branches", "Log", "Stash", "Remote"
-    };
+    const char* hint = "";
+    switch (tab_index) {
+        case 0: hint = "j/k: move  d: diff  h/l: switch  q: quit  ?: help"; break;
+        case 1: hint = "Space: select  s: stage  u: unstage  a: all  c: commit  h/l: switch"; break;
+        case 2: hint = "Enter: checkout  n: new branch  d: delete  h/l: switch"; break;
+        case 3: hint = "Enter: detail  d: diff  n/p: page  h/l: switch"; break;
+        case 4: hint = "s: stash  p: pop  d: drop  h/l: switch"; break;
+        case 5: hint = "f: fetch  P: push  h/l: switch"; break;
+    }
 
-    std::string tab_label = tab_index >= 0 && tab_index < 6
-        ? tab_names[tab_index] : "";
+    std::string path = repo_path;
+    if (path.size() > 35) path = "..." + path.substr(path.size() - 32);
 
-    std::string left = " " + tab_label + "  |  " + repo_path + "  ";
-    std::string right = " " + status_line + " ";
-
-    auto left_el = text(left) | dim;
-    auto right_el = text(right) | dim;
-
-    int left_size = static_cast<int>(left.size());
-    int right_size = static_cast<int>(right.size());
-    int total = std::max(left_size, right_size) * 2 + 2;
-
-    auto filler = text(std::string(total > left_size + right_size ? total - left_size - right_size : 1, ' ')) | dim;
-
-    return hbox({left_el, filler, right_el}) | border;
+    return hbox({
+        text(" " + std::string(hint) + " ") | dim | flex,
+        separator(),
+        text(" " + path + " ") | dim,
+    }) | border;
 }
 
 inline ftxui::Component CreateApp(GitRepo* repo) {
@@ -140,8 +136,7 @@ inline ftxui::Component CreateApp(GitRepo* repo) {
         return vbox({
             TabBar(app->tab_index),
             active_render | flex,
-            separator(),
-            StatusBar(repo->path(), app->tab_index, app->status_line),
+            KeyHintBar(app->tab_index, repo->path()),
         });
     });
 

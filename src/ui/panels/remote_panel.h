@@ -114,20 +114,16 @@ inline ftxui::Component RemotePanel(GitRepo* repo,
             }
         }
 
-        if (!state->status_text.empty()) {
-            elements.push_back(separator());
-            auto s = text(" " + state->status_text);
-            if (state->in_progress) {
-                s = s | color(colors::kYellow) | bold;
-            } else {
-                s = s | dim;
-            }
-            elements.push_back(s);
-        }
+        if (state->status_text.empty()) return vbox(std::move(elements)) | border | vscroll_indicator;
 
         elements.push_back(separator());
-        elements.push_back(
-            text(" f: fetch  P: push ") | dim);
+        auto s = text(" " + state->status_text);
+        if (state->in_progress) {
+            s = s | color(colors::kYellow) | bold;
+        } else {
+            s = s | dim;
+        }
+        elements.push_back(s);
 
         return vbox(std::move(elements)) | border | vscroll_indicator;
     });

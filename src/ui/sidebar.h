@@ -17,23 +17,22 @@ inline ftxui::Element TabBar(int tab_index) {
     };
 
     Elements items;
-    items.push_back(text(" zazaki_git ") | bold | color(colors::kText));
-    items.push_back(separator());
-
     for (size_t i = 0; i < tabs.size(); i++) {
-        auto label = " " + tabs[i] + " ";
-        Element el = text(label) | color(colors::kSubtext0);
+        auto num = std::to_string(i + 1);
+        auto label = " " + num + ": " + tabs[i] + " ";
+        Element el;
         if (static_cast<int>(i) == tab_index) {
-            el = text(label) | bold | inverted | color(colors::kBlue);
+            el = text(label) | bold | color(colors::kBlue) | inverted;
+        } else {
+            el = text(label) | color(colors::kOverlay0);
         }
         items.push_back(el);
+        if (i < tabs.size() - 1) {
+            items.push_back(separator());
+        }
     }
 
-    items.push_back(separator());
-    items.push_back(text(" h/l: switch  ?: help  q: quit ")
-                    | color(colors::kOverlay0));
-
-    return hbox(std::move(items)) | border;
+    return hbox(std::move(items));
 }
 
 }  // namespace zazaki_git

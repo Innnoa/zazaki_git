@@ -85,22 +85,16 @@ inline ftxui::Component BranchPanel(GitRepo* repo,
             elements.push_back(text(" "));
         }
 
-        if (!state->status_text.empty()) {
-            elements.push_back(separator());
-            elements.push_back(
-                text(" " + state->status_text) | dim);
-        }
+        if (state->status_text.empty()) return vbox(std::move(elements)) | border;
 
         elements.push_back(separator());
         elements.push_back(
-            text(" Enter: switch  n: new  d: delete ") | dim);
+            text(" " + state->status_text) | dim);
 
         if (state->create_mode) {
             elements.push_back(separator());
             elements.push_back(
                 text(" New branch: " + state->new_branch_name) | bold);
-            elements.push_back(
-                text(" Enter: confirm  Esc: cancel ") | dim);
         }
 
         return vbox(std::move(elements)) | border | vscroll_indicator;

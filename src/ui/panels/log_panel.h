@@ -114,7 +114,10 @@ inline ftxui::Component LogPanel(GitRepo* repo,
         if (n == static_cast<int>(LogPanelState::kPageSize)) {
             page_info += "  n: next";
         }
-        elements.push_back(text(" " + page_info + "  Enter: detail ") | dim);
+        elements.push_back(separator());
+        if (n > 0) {
+            elements.push_back(text(" " + page_info) | dim);
+        }
 
         return vbox(std::move(elements)) | border | vscroll_indicator;
     });

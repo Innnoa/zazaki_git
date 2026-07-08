@@ -80,15 +80,11 @@ inline ftxui::Component StashPanel(GitRepo* repo,
             }
         }
 
-        if (!state->status_text.empty()) {
-            elements.push_back(separator());
-            elements.push_back(
-                text(" " + state->status_text) | dim);
-        }
+        if (state->status_text.empty()) return vbox(std::move(elements)) | border | vscroll_indicator;
 
         elements.push_back(separator());
         elements.push_back(
-            text(" s: save  p: pop  d: drop ") | dim);
+            text(" " + state->status_text) | dim);
 
         return vbox(std::move(elements)) | border | vscroll_indicator;
     });
