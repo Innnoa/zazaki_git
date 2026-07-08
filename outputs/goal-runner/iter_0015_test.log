@@ -1,0 +1,9 @@
+构建通过，但 ctest 没找到注册的测试。检查一下测试配置和 GOAL_STATE：
+测试本身全部通过 (11/11, 65 assertions)。ctest 没找到测试是因为 CMakeLists.txt 缺少 `enable_testing()` 和 `add_test()`。修复 CMake 并更新状态。
+构建通过，ctest 1/1 全部通过。更新 GOAL_STATE：
+**[TEST] All tests passed.**
+
+- `cmake --build build`: 编译通过，3/3 targets 成功（无错误无警告）
+- `ctest`: 1/1 passed — `zazaki_git_tests` 11/11 测试用例，65 断言全部通过
+- 修复了 `tests/CMakeLists.txt` 缺少 `add_test()` 导致 ctest 找不到测试的问题
+- GOAL_STATE 已更新：phase → `review`，iteration → 15

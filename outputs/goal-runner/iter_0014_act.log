@@ -1,0 +1,20 @@
+Let me also check the existing tests structure for patterns.
+Now I have full context. The first incomplete subtask is **git/ extension modules** (branch, log, diff, remote, stash). I'll create all 5 header-only modules using libgit2 with the existing `Result<T>` pattern.
+LSP reports only expected include-path issues (resolved by CMake). A few real issues need fixing. Let me fix those and update CMakeLists.txt.
+所有 LSP 报错都为预期（include path 由 CMake 解析）。现在尝试编译验证。
+编译通过。运行测试确认一切正常。
+编译和测试全部通过。现在更新 GOAL_STATE.json。
+清理 stash.h 中未使用的变量。
+**子任务完成** — git/ 扩展模块全部实现完毕。
+
+5 个 header-only 模块已写入 `src/git/`：
+
+| 文件 | 接口 |
+|------|------|
+| `branch.h` | `BranchInfo`, `branch_list`, `branch_create`, `branch_switch_to`, `branch_delete` |
+| `log.h` | `log_list`, `log_commit_message`, `format_git_time` |
+| `diff.h` | `DiffLine`, `DiffFile`, `diff_index_to_workdir`, `diff_head_to_index`, `diff_commit`, `diff_stat` |
+| `remote.h` | `RemoteInfo`, `remote_list`, `remote_fetch`, `remote_push` |
+| `stash.h` | `StashInfo`, `stash_list`, `stash_push`, `stash_pop`, `stash_drop` |
+
+**验证**: `cmake --build build --clean-first` 零警告通过，`zazaki_git_tests` 11/11 测试通过 (65 断言)。GOAL_STATE.json 已更新为 phase=test，子任务已标记完成。

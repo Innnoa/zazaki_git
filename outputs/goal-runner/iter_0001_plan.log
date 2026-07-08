@@ -1,0 +1,16 @@
+Now I have a full understanding of the codebase. Let me break this down into concrete subtasks.
+
+**已完成**: git 模块（全部实现）、UI 面板（7个面板都已实现）、UI 组件（list/input）、测试（19个）、构建系统（已能编译通过）。
+
+**待完成**: App 架构层（事件循环、侧边栏、主面板）、diff_panel、help_panel、main.cpp 集成。
+GOAL_STATE.json 已更新，plan 阶段完成。
+
+**分析结果**：项目已完成 60-70%。git 模块（repo/branch/diff/log/remote/stash）、7 个 UI 面板、UI 组件、配置系统、19 个测试全部实现且构建通过。剩余工作集中在**架构集成层**：
+
+- `diff_panel.h` / `help_panel.h`（缺失面板）
+- `app/` 目录（事件循环、键盘路由）
+- `sidebar.h` / `main_panel.h`（布局容器）
+- `main.cpp`（组件组装、FTXUI 启动）
+- 更新 CMakeLists.txt
+
+12 个子任务已拆解，进入 act 阶段后可逐项执行。

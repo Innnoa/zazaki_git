@@ -1,0 +1,26 @@
+Now let me read existing panels and git modules to understand conventions.
+Now I have a complete picture. Let me implement all missing components. I'll create them in parallel.
+Let me fix the `hseparator` issue in help_panel.h and create the remaining files:
+Now let me fix the `main.cpp` to avoid the GNU extension and use portable C++, then try building:
+Now let me try building:
+编译通过，零错误。运行单元测试：
+30/30 测试通过，198 断言全绿。验证文件存在性：
+全部就绪。现在更新 GOAL_STATE.json：
+全部 10 个子任务完成，总结如下：
+
+**新增 6 个文件：**
+
+| 文件 | 功能 |
+|------|------|
+| `src/ui/diff_panel.h` | diff 查看面板，支持 j/k/PgUp/PgDn 滚动、g/G 跳转、q/Esc 返回 |
+| `src/ui/help_panel.h` | 帮助面板，10 个分组的按键绑定说明，q/Esc/? 关闭 |
+| `src/ui/sidebar.h` | 侧边栏，6 个 tab 名称列表，高亮当前选中 |
+| `src/ui/main_panel.h` | 主面板容器，通过 `Container::Tab` 路由到对应子面板 |
+| `src/app/app.h` | App 主组件，含全局按键处理（1-6/Tab/q/?/Ctrl+R）、状态栏、diff/commit 模态 |
+| `src/main.cpp` | 程序入口，解析仓库路径，创建 `ScreenInteractive` 启动事件循环 |
+
+**验证结果：**
+- `cmake --build build` — 编译通过，零错误
+- 30/30 单元测试通过，198 断言全绿
+- 6 个新文件全部存在于磁盘
+- 设计文档已存在

@@ -1,0 +1,12 @@
+/home/zazaki/Projects/zazaki_git/build/CMakeFiles/test.dir
+/home/zazaki/Projects/zazaki_git/build/CMakeFiles/edit_cache.dir
+/home/zazaki/Projects/zazaki_git/build/CMakeFiles/rebuild_cache.dir
+/home/zazaki/Projects/zazaki_git/build/src/CMakeFiles/zazaki_git_lib.dir
+/home/zazaki/Projects/zazaki_git/build/src/CMakeFiles/zazaki_git.dir
+/home/zazaki/Projects/zazaki_git/build/src/CMakeFiles/test.dir
+/home/zazaki/Projects/zazaki_git/build/src/CMakeFiles/edit_cache.dir
+/home/zazaki/Projects/zazaki_git/build/src/CMakeFiles/rebuild_cache.dir
+/home/zazaki/Projects/zazaki_git/build/tests/CMakeFiles/zazaki_git_tests.dir
+/home/zazaki/Projects/zazaki_git/build/tests/CMakeFiles/test.dir
+/home/zazaki/Projects/zazaki_git/build/tests/CMakeFiles/edit_cache.dir
+/home/zazaki/Projects/zazaki_git/build/tests/CMakeFiles/rebuild_cache.dir

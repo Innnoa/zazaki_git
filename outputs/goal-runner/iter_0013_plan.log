@@ -1,0 +1,21 @@
+GOAL_STATE.json 已更新。
+
+**当前状态总结：**
+
+| 步骤 | 内容 | 状态 |
+|------|------|------|
+| 1 | CMake 骨架 | ✅ |
+| 2 | git/ 核心模块 (repo) | ✅ |
+| 3 | util/ 模块 (logger, config) | ✅ |
+| 4 | git/ 扩展 (branch/log/diff/remote/stash) | ⬜ |
+| 5 | 扩展模块单元测试 | ⬜ |
+| 6 | UI 基础组件 (list, input) | ⬜ |
+| 7 | UI 面板 (Status/Staging/Commit) | ⬜ |
+| 8 | UI 面板 (Branch/Log/Stash/Remote) | ⬜ |
+| 9 | UI 面板 (Diff/Help/Sidebar/Main/BottomBar) | ⬜ |
+| 10 | app/ 模块 (事件循环, keybindings) | ⬜ |
+| 11 | main.cpp 集成 | ⬜ |
+| 12 | 手工验证 | ⬜ |
+| 13 | 设计文档确认 | ⬜ |
+
+阶段已设为 `act`，从步骤 4 (git/ 扩展模块) 开始依次实现。

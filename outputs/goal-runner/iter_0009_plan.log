@@ -1,0 +1,25 @@
+当前项目状态清晰：
+- **已完成**：CMake 骨架 + git/ 核心模块 (repo.h/cpp) + 11 个单元测试通过
+- **待完成**：git/ 扩展模块、util/、UI 组件/面板、app/、集成验证
+
+现有 13 步骤方案结构仍然有效，前两步标记完成，后 11 步继续推进。现在写入 GOAL_STATE.json。
+已完成 PLAN 阶段。
+
+**调整说明**：原有 13 步骤方案结构有效，仅做一处微调——将 `util/` (logger/config) 前移为步骤 3，因为它是所有后续模块的公共依赖。
+
+**当前 13 步骤**：
+1. CMake 骨架 ✓
+2. git/ 核心模块 ✓
+3. util/ — logger.h、config.h (TOML)
+4. git/ 扩展 — branch、log、diff、remote、stash
+5. tests/ — git 扩展模块测试
+6. UI 组件 — list.h、input.h、menu.h
+7. UI 面板 — StatusPanel、StagingPanel、CommitPanel
+8. UI 面板 — BranchPanel、LogPanel、StashPanel、RemotePanel
+9. UI 面板 — DiffPanel、HelpPanel、Sidebar、MainPanel、BottomBar
+10. app/ — 事件循环、keybindings.h
+11. main.cpp 集成 + 编译
+12. 真实仓库手工验证
+13. 设计文档确认
+
+`phase` 已设为 `"act"`，可从步骤 3 开始实现。

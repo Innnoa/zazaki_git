@@ -1,0 +1,30 @@
+Now I have full understanding of the codebase. Let me write the updated plan.
+
+**Current state:**
+- `git/` module + 6 panel components + 2 UI components + build/test framework → all working (criteria 1, 9, 10 met)
+- Missing: `app/` (empty), `ui/diff_panel.h`, `ui/help_panel.h`, `ui/sidebar.h`, `ui/main_panel.h`, real `main.cpp` → criteria 2-8 unmet
+GOAL_STATE.json 已更新。规划完成：
+
+**当前状态总结：**
+- ✅ Criteria 1, 9, 10: 构建通过、测试全绿、设计文档存在
+- ❌ Criteria 2-8: TUI 界面完全缺失
+
+**新计划 — 10 个互不重叠的子任务：**
+
+| # | 子任务 | 产出物 |
+|---|--------|--------|
+| 1 | `diff_panel.h` | diff 查看面板 |
+| 2 | `help_panel.h` | 帮助面板 |
+| 3 | `keybindings.h` | 全局键盘路由 |
+| 4 | `sidebar.h` | 侧边栏组件 |
+| 5 | `main_panel.h` | 主面板容器（路由到 6 个已有面板） |
+| 6 | `app.h` | App 主组件（事件循环、状态管理、模态对话框） |
+| 7 | `main.cpp` | 入口点（组装所有组件并启动） |
+| 8 | 构建验证 | `cmake --build build` |
+| 9 | 单元测试 | 30/30 通过 |
+| 10 | 路径存在性 | 确认所有新文件就位 |
+
+**关键设计决策：**
+- 所有目录已存在（`src/app/` 只需创建文件，不需要 mkdir）
+- 所有组件 header-only，CMakeLists.txt 无需修改
+- 复用已有的 6 个面板组件 + list.h/input.h，不做重复工作

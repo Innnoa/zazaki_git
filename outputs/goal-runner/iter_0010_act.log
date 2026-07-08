@@ -1,0 +1,11 @@
+Now I have the full picture. Let me create `util/logger.h` and `util/config.h`.
+Now let me create the default config file:
+编译通过。运行测试确认：
+全部通过。更新 GOAL_STATE.json：
+已完成子任务：**util/ 模块**
+
+- **`src/util/logger.h`** — 4 个日志级别 (Debug/Info/Warn/Error)，4 个宏 (`LOG_DEBUG`/`LOG_INFO`/`LOG_WARN`/`LOG_ERROR`)，带时间戳/文件/行号/函数上下文，使用 fmt 库格式化
+- **`src/util/config.h`** — `Config` 类，完整 TOML 解析器（section/key-value/comments），快捷键名→FTXUI Event 映射（Space/Enter/Escape/Tab/Ctrl+A~Z/箭头/F1-F12/单字符），颜色名→FTXUI Color 映射（16 基础色 + 32 灰度色）
+- **`config/default.toml`** — 默认配置（keybindings 30+ / colors 14 / ui 3）
+
+验证：`cmake --build build` 编译通过，`zazaki_git_tests` 11/11 通过，65 断言全部通过。

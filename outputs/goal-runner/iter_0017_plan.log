@@ -1,0 +1,7 @@
+Plan is accurate. 4/13 subtasks done (CMake + git/core + util/ + git/extensions code). 9 remaining: extension tests → 3 UI panel groups → app/ module → main.cpp integration → manual verification → design doc. Updating GOAL_STATE.json.
+**Plan updated.** 真实状态确认:
+
+- **已完成 (4/13)**: CMake 骨架 + git/core (repo.h/cpp) + util/ (logger/config) + git/扩展 (branch/log/diff/remote/stash header-only)
+- **待实现 (9/13)**: 扩展单元测试 → UI 基础组件 → 3组 UI 面板 → app/ 模块 → main.cpp 集成 → 手工验证 → 设计文档
+- **关键缺口**: 扩展模块有代码但 ZERO tests、`src/ui/`/`src/app/` 空目录、`main.cpp` 空桩
+- Phase: `plan` → `act`，从步骤 5（扩展测试）开始

@@ -1,0 +1,1 @@
+/usr/sbin/c++ -g -Wl,--dependency-file=CMakeFiles/zazaki_git_tests.dir/link.d CMakeFiles/zazaki_git_tests.dir/test_main.cpp.o CMakeFiles/zazaki_git_tests.dir/test_git_core.cpp.o CMakeFiles/zazaki_git_tests.dir/test_git_extensions.cpp.o ../src/CMakeFiles/zazaki_git_lib.dir/git/repo.cpp.o -o zazaki_git_tests  /usr/lib/libgit2.so

@@ -1,0 +1,841 @@
+Start testing: Jul 07 12:40 CST
+----------------------------------------------------------
+1/1 Testing: zazaki_git_tests
+1/1 Test: zazaki_git_tests
+Command: "/home/zazaki/Projects/zazaki_git/build/tests/zazaki_git_tests" "--success"
+Directory: /home/zazaki/Projects/zazaki_git/build/tests
+"zazaki_git_tests" start time: Jul 07 12:40 CST
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.5.2"
+[doctest] run with "--help" for options
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:53:
+TEST CASE:  GitRepo open and head
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_0 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_0 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:57: SUCCESS: REQUIRE( head.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:58: SUCCESS: REQUIRE( !head->detached ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:61:
+TEST CASE:  GitRepo status shows untracked files
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_1 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_1 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:65: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:66: SUCCESS: REQUIRE( status->untracked.size() == 2 ) is correct!
+  values: REQUIRE( 2 == 2 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:67: SUCCESS: REQUIRE( status->untracked[0].status == FileStatus::Status::NewUntracked ) is correct!
+  values: REQUIRE( 0 == 0 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:70:
+TEST CASE:  GitRepo stage single file
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_2 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_2 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:74: SUCCESS: REQUIRE( r.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:77: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:78: SUCCESS: REQUIRE( status->staged.size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:79: SUCCESS: REQUIRE( status->staged[0].path.find("test.txt") != std::string::npos ) is correct!
+  values: REQUIRE( 0 != 18446744073709551615 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:80: SUCCESS: REQUIRE( status->staged[0].is_staged ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:81: SUCCESS: REQUIRE( status->untracked.size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:84:
+TEST CASE:  GitRepo stage all and commit
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_3 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_3 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:88: SUCCESS: REQUIRE( r.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:91: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:92: SUCCESS: REQUIRE( status->staged.size() == 2 ) is correct!
+  values: REQUIRE( 2 == 2 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:93: SUCCESS: REQUIRE( status->untracked.empty() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:96: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:97: SUCCESS: REQUIRE( !commit_result->empty() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:100: SUCCESS: REQUIRE( status2.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:101: SUCCESS: REQUIRE( status2->staged.empty() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:102: SUCCESS: REQUIRE( status2->untracked.empty() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:105:
+TEST CASE:  GitRepo unstage single file
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_4 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_4 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:108: SUCCESS: REQUIRE( t.repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:110: SUCCESS: REQUIRE( r.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:113: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:114: SUCCESS: REQUIRE( status->untracked.size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:117:
+TEST CASE:  GitRepo unstage all
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_5 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_5 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:120: SUCCESS: REQUIRE( t.repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:122: SUCCESS: REQUIRE( r.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:125: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:126: SUCCESS: REQUIRE( status->staged.empty() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:129:
+TEST CASE:  GitRepo status after commit shows clean
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_6 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_6 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:132: SUCCESS: REQUIRE( t.repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:134: SUCCESS: REQUIRE( commit.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:137: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:138: SUCCESS: REQUIRE( !status->has_changes() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:141:
+TEST CASE:  GitRepo commit with empty index creates root commit
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_7 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_7 returned 0
+          repo.open failed: 
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:145: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:146: SUCCESS: REQUIRE( !result->empty() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:149:
+TEST CASE:  GitRepo config string
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:28: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_test_8 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:33: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_test_8 returned 0
+          repo.open failed: 
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:158:
+TEST CASE:  GitRepo Result type basic
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:160: SUCCESS: REQUIRE( ok_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:161: SUCCESS: REQUIRE( !ok_result.is_err() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:162: SUCCESS: REQUIRE( *ok_result == 42 ) is correct!
+  values: REQUIRE( 42 == 42 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:165: SUCCESS: REQUIRE( err_result.is_err() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:166: SUCCESS: REQUIRE( !err_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:167: SUCCESS: REQUIRE( err_result.error().message() == "something went wrong" ) is correct!
+  values: REQUIRE( something went wrong == something went wrong )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:170: SUCCESS: REQUIRE( void_ok.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:173: SUCCESS: REQUIRE( void_err.is_err() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:174: SUCCESS: REQUIRE( void_err.error().message() == "void error" ) is correct!
+  values: REQUIRE( void error == void error )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:177:
+TEST CASE:  GitRepo unopened
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:179: SUCCESS: REQUIRE( !repo.is_open() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:182: SUCCESS: REQUIRE( status.is_err() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:185: SUCCESS: REQUIRE( stage.is_err() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_core.cpp:188: SUCCESS: REQUIRE( commit.is_err() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:75:
+TEST CASE:  branch: list branches with initial commit
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_0 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_0 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_0 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_0 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:78: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:79: SUCCESS: REQUIRE( result->size() >= 1 ) is correct!
+  values: REQUIRE( 1 >= 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:84: SUCCESS: CHECK( found_current ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:87:
+TEST CASE:  branch: create and switch branch
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_1 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_1 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_1 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_1 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:90: SUCCESS: REQUIRE( create_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:97: SUCCESS: CHECK( found_new ) is correct!
+  values: CHECK( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:103: SUCCESS: CHECK( switch_result.is_ok() ) is correct!
+  values: CHECK( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:109: SUCCESS: CHECK( b.is_current ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:115:
+TEST CASE:  branch: fail to delete current branch
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_2 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_2 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_2 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_2 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:118: SUCCESS: CHECK( result.is_err() ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:121:
+TEST CASE:  branch: create and delete non-current branch
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_3 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_3 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_3 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_3 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:123: SUCCESS: REQUIRE( branch_create(t.repo.raw(), "temp-branch").is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:126: SUCCESS: CHECK( del_result.is_ok() ) is correct!
+  values: CHECK( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:130: SUCCESS: CHECK( b.name != "temp-branch" ) is correct!
+  values: CHECK( master != temp-branch )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:134:
+TEST CASE:  log: list commits after one commit
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_4 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_4 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_4 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_4 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:137: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:138: SUCCESS: REQUIRE( result->size() >= 1 ) is correct!
+  values: REQUIRE( 1 >= 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:139: SUCCESS: CHECK( (*result)[0].message == "initial commit" ) is correct!
+  values: CHECK( initial commit == initial commit )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:142:
+TEST CASE:  log: log_commit_message returns correct message
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_5 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_5 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_5 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_5 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:145: SUCCESS: REQUIRE( log_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:146: SUCCESS: REQUIRE( log_result->size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:149: SUCCESS: REQUIRE( msg.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:150: SUCCESS: CHECK( *msg == "initial commit" ) is correct!
+  values: CHECK( initial commit == initial commit )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:153:
+TEST CASE:  log: multiple commits show in order
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_6 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_6 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_6 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_6 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:156: SUCCESS: REQUIRE( t.repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:157: SUCCESS: REQUIRE( t.repo.commit("second commit").is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:160: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:161: SUCCESS: REQUIRE( result->size() >= 2 ) is correct!
+  values: REQUIRE( 2 >= 2 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:162: SUCCESS: CHECK( (*result)[0].message == "second commit" ) is correct!
+  values: CHECK( second commit == second commit )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:163: SUCCESS: CHECK( (*result)[1].message == "initial commit" ) is correct!
+  values: CHECK( initial commit == initial commit )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:166:
+TEST CASE:  diff: index_to_workdir shows unstaged changes
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_7 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_7 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_7 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_7 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:171: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:172: SUCCESS: CHECK( result->size() > 0 ) is correct!
+  values: CHECK( 4 >  0 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:181: SUCCESS: CHECK( found_addition ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:184:
+TEST CASE:  diff: index_to_workdir on clean repo returns minimal diff
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_8 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_8 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_8 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_8 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:187: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:190:
+TEST CASE:  diff: head_to_index after stage shows staged changes
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_9 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_9 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_9 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_9 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:193: SUCCESS: REQUIRE( t.repo.stage("tracked.txt").is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:196: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:205: SUCCESS: CHECK( found_addition ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:208:
+TEST CASE:  diff: diff_commit shows full diff
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_10 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_10 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_10 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_10 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:211: SUCCESS: REQUIRE( t.repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:213: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:216: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:217: SUCCESS: CHECK( result->size() > 0 ) is correct!
+  values: CHECK( 3 >  0 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:220:
+TEST CASE:  diff: diff_stat returns statistics
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_11 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_11 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_11 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_11 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:225: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:226: SUCCESS: CHECK( !result->empty() ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:229:
+TEST CASE:  remote: list remotes initially empty
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_12 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_12 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_12 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_12 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:232: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:233: SUCCESS: CHECK( result->size() == 0 ) is correct!
+  values: CHECK( 0 == 0 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:236:
+TEST CASE:  remote: fetch non-existent remote fails
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_13 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_13 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_13 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_13 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:239: SUCCESS: CHECK( result.is_err() ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:242:
+TEST CASE:  remote: push without remote fails
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_14 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_14 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_14 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_14 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:245: SUCCESS: CHECK( result.is_err() ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:248:
+TEST CASE:  stash: empty stash list
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_15 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_15 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_15 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_15 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:251: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:252: SUCCESS: CHECK( result->size() == 0 ) is correct!
+  values: CHECK( 0 == 0 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:255:
+TEST CASE:  stash: push tracked modification and list
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_16 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_16 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_16 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_16 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:260: SUCCESS: REQUIRE( push_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:263: SUCCESS: REQUIRE( list_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:264: SUCCESS: REQUIRE( list_result->size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:265: SUCCESS: CHECK( (*list_result)[0].index == 0 ) is correct!
+  values: CHECK( 0 == 0 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:268: SUCCESS: REQUIRE( status.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:269: SUCCESS: CHECK( !status->has_changes() ) is correct!
+  values: CHECK( true )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:272:
+TEST CASE:  stash: drop removes stash entry
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_17 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_17 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_17 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_17 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:275: SUCCESS: REQUIRE( stash_push(t.repo.raw()).is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:278: SUCCESS: REQUIRE( drop_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:281: SUCCESS: REQUIRE( list_after.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:282: SUCCESS: CHECK( list_after->size() == 0 ) is correct!
+  values: CHECK( 0 == 0 )
+
+===============================================================================
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:285:
+TEST CASE:  stash: push with custom message
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:34: SUCCESS: REQUIRE( err == 0 ) is correct!
+  values: REQUIRE( 0 == 0 )
+  logged: repo_init at /tmp/zazaki_ext_test_18 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:41: SUCCESS: REQUIRE( result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_18 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:49: SUCCESS: REQUIRE( repo.stage_all().is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_18 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:54: SUCCESS: REQUIRE( commit_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+  logged: repo_init at /tmp/zazaki_ext_test_18 returned 0
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:290: SUCCESS: REQUIRE( push_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:293: SUCCESS: REQUIRE( list_result.is_ok() ) is correct!
+  values: REQUIRE( true )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:294: SUCCESS: REQUIRE( list_result->size() == 1 ) is correct!
+  values: REQUIRE( 1 == 1 )
+
+/home/zazaki/Projects/zazaki_git/tests/test_git_extensions.cpp:295: SUCCESS: CHECK( (*list_result)[0].message.find("my stash message") != std::string::npos ) is correct!
+  values: CHECK( 11 != 18446744073709551615 )
+
+===============================================================================
+[doctest] test cases:  30 |  30 passed | 0 failed | 0 skipped
+[doctest] assertions: 198 | 198 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"zazaki_git_tests" end time: Jul 07 12:40 CST
+"zazaki_git_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 07 12:40 CST
