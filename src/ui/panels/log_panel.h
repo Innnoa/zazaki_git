@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "git/log.h"
+#include "git/diff.h"
 #include "ui/colors.h"
 
 namespace zazaki_git {
@@ -23,7 +24,8 @@ struct LogPanelState {
 
 inline ftxui::Component LogPanel(GitRepo* repo,
                                   LogPanelState* state,
-                                  int visible_lines = 20) {
+                                  int visible_lines = 20,
+                                  std::function<void(const std::string&, std::vector<DiffLine>)> show_diff_fn = {}) {
     using namespace ftxui;
 
     auto renderer = Renderer([=] {
@@ -173,6 +175,18 @@ inline ftxui::Component LogPanel(GitRepo* repo,
                     "Date:   " + c.date + "\n\n" +
                     c.message;
                 state->show_detail = true;
+            }
+            return true;
+        }
+
+        if (event == Event::Character('d') && show_diff_fn) {
+            if (state->highlight >= 0 && state->highlight < n) {
+                auto& c = commits[state->highlight];
+                auto r = diff_commit(repo->raw(), c.hash);
+                if (r.is_ok()) {
+                    show_diff_fn("Commit: " + c.hash.substr(0, 7) + " " + c.message,
+                                 r.value());
+                }
             }
             return true;
         }

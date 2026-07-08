@@ -84,10 +84,20 @@ inline ftxui::Component CreateApp(GitRepo* repo) {
     auto app = std::make_shared<App>();
     app->repo = repo;
 
-    auto status_panel = StatusPanel(repo, &app->status_selected, &app->status_scroll);
+    auto status_panel = StatusPanel(repo, &app->status_selected, &app->status_scroll, 20,
+        [=](const std::string& title, std::vector<DiffLine> lines) {
+            app->diff_title = title;
+            app->diff_lines = std::move(lines);
+            app->show_diff = true;
+        });
     auto staging_panel = StagingPanel(repo, &app->staging_state);
     auto branch_panel = BranchPanel(repo, &app->branch_state);
-    auto log_panel = LogPanel(repo, &app->log_state);
+    auto log_panel = LogPanel(repo, &app->log_state, 20,
+        [=](const std::string& title, std::vector<DiffLine> lines) {
+            app->diff_title = title;
+            app->diff_lines = std::move(lines);
+            app->show_diff = true;
+        });
     auto stash_panel = StashPanel(repo, &app->stash_state);
     auto remote_panel = RemotePanel(repo, &app->remote_state);
     auto commit_panel = CommitPanel(repo, &app->commit_state);

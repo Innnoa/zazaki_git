@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "git/repo.h"
+#include "git/diff.h"
 #include "ui/colors.h"
 
 namespace zazaki_git {
@@ -15,7 +16,8 @@ namespace zazaki_git {
 inline ftxui::Component StatusPanel(GitRepo* repo,
                                     int* selected,
                                     int* scroll_offset,
-                                    int visible_lines = 20) {
+                                    int visible_lines = 20,
+                                    std::function<void(const std::string&, std::vector<DiffLine>)> show_diff_fn = {}) {
     using namespace ftxui;
 
     auto renderer = Renderer([=] {
@@ -115,6 +117,27 @@ inline ftxui::Component StatusPanel(GitRepo* repo,
         }
         if (event == Event::Character('G')) {
             *selected = std::max(0, total - 1);
+            return true;
+        }
+        if (event == Event::Character('d') && show_diff_fn && total > 0) {
+            int idx = 0;
+            auto match = [&](const std::vector<FileStatus>& files,
+                             const std::string& label) -> bool {
+                for (auto& f : files) {
+                    if (idx == *selected) {
+                        auto r = diff_index_to_workdir(repo->raw(), f.path);
+                        if (r.is_ok()) {
+                            show_diff_fn(label + ": " + f.path, r.value());
+                        }
+                        return true;
+                    }
+                    idx++;
+                }
+                return false;
+            };
+            if (match(result->staged, "Staged")) return true;
+            if (match(result->unstaged, "Unstaged")) return true;
+            if (match(result->untracked, "Untracked")) return true;
             return true;
         }
         return false;

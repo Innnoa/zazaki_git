@@ -25,6 +25,7 @@ inline ftxui::Element HelpContent() {
             {"k / Up",    "Move cursor up"},
             {"g",         "Jump to top"},
             {"G",         "Jump to bottom"},
+            {"d",         "View diff for selected file/commit"},
         }},
         {"File Operations", {
             {"Space",     "Select/deselect file (Staging tab)"},
