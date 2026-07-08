@@ -48,45 +48,32 @@ inline Result<std::vector<RemoteInfo>> remote_list(git_repository* repo) {
     return Result<std::vector<RemoteInfo>>::ok(std::move(result));
 }
 
-inline Result<void> remote_fetch(git_repository* repo, const std::string& name) {
-    if (!repo) return Result<void>::err("Repository not open");
-
-    git_remote* remote = nullptr;
-    int err = git_remote_lookup(&remote, repo, name.c_str());
-    if (err != 0) {
-        return Result<void>::from_git_error(err, "Remote not found: " + name);
-    }
-
-    git_fetch_options opts = GIT_FETCH_OPTIONS_INIT;
-    err = git_remote_fetch(remote, nullptr, &opts, nullptr);
-    git_remote_free(remote);
-
-    if (err != 0) {
-        return Result<void>::from_git_error(err, "Fetch failed for: " + name);
+inline Result<void> remote_exec(const std::string& repo_path,
+                                 const std::vector<std::string>& args) {
+    std::string cmd = "timeout 30 env GIT_TERMINAL_PROMPT=0 git -C \"" + repo_path + "\"";
+    for (auto& a : args) cmd += " " + a;
+    cmd += " 2>&1 </dev/null";
+    FILE* pipe = popen(cmd.c_str(), "r");
+    if (!pipe) return Result<void>::err("Failed to execute: git");
+    std::string output;
+    char buf[256];
+    while (fgets(buf, sizeof(buf), pipe)) output += buf;
+    int rc = pclose(pipe);
+    if (rc != 0) {
+        if (!output.empty() && output.back() == '\n') output.pop_back();
+        return Result<void>::err(output.empty() ? "git command failed" : output);
     }
     return Result<void>::ok();
 }
 
-inline Result<void> remote_push(git_repository* repo, const std::string& name) {
-    if (!repo) return Result<void>::err("Repository not open");
+inline Result<void> remote_fetch(GitRepo* repo, const std::string& name) {
+    if (!repo || !repo->is_open()) return Result<void>::err("Repository not open");
+    return remote_exec(repo->path(), {"fetch", name});
+}
 
-    git_remote* remote = nullptr;
-    int err = git_remote_lookup(&remote, repo, name.c_str());
-    if (err != 0) {
-        return Result<void>::from_git_error(err, "Remote not found: " + name);
-    }
-
-    git_push_options opts = GIT_PUSH_OPTIONS_INIT;
-    const char* refspecs[] = {"refs/heads/*:refs/heads/*"};
-    git_strarray arr = {const_cast<char**>(refspecs), 1};
-
-    err = git_remote_push(remote, &arr, &opts);
-    git_remote_free(remote);
-
-    if (err != 0) {
-        return Result<void>::from_git_error(err, "Push failed for: " + name);
-    }
-    return Result<void>::ok();
+inline Result<void> remote_push(GitRepo* repo, const std::string& name) {
+    if (!repo || !repo->is_open()) return Result<void>::err("Repository not open");
+    return remote_exec(repo->path(), {"push", name});
 }
 
 }  // namespace zazaki_git

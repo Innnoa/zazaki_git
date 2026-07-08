@@ -306,6 +306,11 @@ src/CMakeFiles/zazaki_git.dir/main.cpp.o: \
  /home/zazaki/Projects/zazaki_git/src/ui/panels/stash_panel.h \
  /home/zazaki/Projects/zazaki_git/src/git/stash.h \
  /home/zazaki/Projects/zazaki_git/src/ui/panels/remote_panel.h \
+ /usr/include/c++/16/thread /usr/include/c++/16/stop_token \
+ /usr/include/c++/16/bits/std_thread.h /usr/include/c++/16/semaphore \
+ /usr/include/c++/16/bits/semaphore_base.h \
+ /usr/include/c++/16/bits/atomic_timed_wait.h \
+ /usr/include/c++/16/bits/this_thread_sleep.h /usr/include/sys/time.h \
  /home/zazaki/Projects/zazaki_git/src/git/remote.h \
  /home/zazaki/Projects/zazaki_git/src/ui/panels/commit_panel.h \
  /home/zazaki/Projects/zazaki_git/src/ui/diff_panel.h \

@@ -1,10 +1,13 @@
 #pragma once
 
 #include <ftxui/component/component.hpp>
+#include <ftxui/component/screen_interactive.hpp>
 #include <ftxui/dom/elements.hpp>
 
 #include <algorithm>
+#include <atomic>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "git/remote.h"
@@ -16,11 +19,38 @@ struct RemotePanelState {
     int highlight = 0;
     int scroll_offset = 0;
     std::string status_text;
+    std::atomic<bool> in_progress{false};
 };
+
+inline void remote_run_async(GitRepo* repo,
+                               RemotePanelState* state,
+                               const std::string& remote_name,
+                               const std::string& action) {
+    state->in_progress = true;
+    auto* sp = state;
+    auto* rp = repo;
+    auto name = remote_name;
+    std::thread([=] {
+        auto result = (action == "push")
+            ? remote_push(rp, name)
+            : remote_fetch(rp, name);
+        std::string msg;
+        if (result.is_err()) {
+            msg = result.error().message();
+        } else {
+            msg = (action == "push" ? "Pushed to " : "Fetched ") + name;
+        }
+        sp->status_text = msg;
+        sp->in_progress = false;
+        if (auto* app = ftxui::ScreenInteractive::Active()) {
+            app->PostEvent(ftxui::Event::Custom);
+        }
+    }).detach();
+}
 
 inline ftxui::Component RemotePanel(GitRepo* repo,
                                     RemotePanelState* state,
-                                    int visible_lines = 20) {
+                                    int visible_lines = 10) {
     using namespace ftxui;
 
     auto renderer = Renderer([=] {
@@ -86,8 +116,13 @@ inline ftxui::Component RemotePanel(GitRepo* repo,
 
         if (!state->status_text.empty()) {
             elements.push_back(separator());
-            elements.push_back(
-                text(" " + state->status_text) | dim);
+            auto s = text(" " + state->status_text);
+            if (state->in_progress) {
+                s = s | color(colors::kYellow) | bold;
+            } else {
+                s = s | dim;
+            }
+            elements.push_back(s);
         }
 
         elements.push_back(separator());
@@ -118,27 +153,19 @@ inline ftxui::Component RemotePanel(GitRepo* repo,
         }
 
         if (event == Event::Character('f')) {
-            if (state->highlight >= 0 && state->highlight < n) {
+            if (!state->in_progress && state->highlight >= 0 && state->highlight < n) {
                 auto& r = remotes[state->highlight];
-                auto fetch_result = remote_fetch(repo->raw(), r.name);
-                if (fetch_result.is_err()) {
-                    state->status_text = fetch_result.error().message();
-                } else {
-                    state->status_text = "Fetched " + r.name;
-                }
+                state->status_text = "Fetching " + r.name + "...";
+                remote_run_async(repo, state, r.name, "fetch");
             }
             return true;
         }
 
         if (event == Event::Character('P')) {
-            if (state->highlight >= 0 && state->highlight < n) {
+            if (!state->in_progress && state->highlight >= 0 && state->highlight < n) {
                 auto& r = remotes[state->highlight];
-                auto push_result = remote_push(repo->raw(), r.name);
-                if (push_result.is_err()) {
-                    state->status_text = push_result.error().message();
-                } else {
-                    state->status_text = "Pushed to " + r.name;
-                }
+                state->status_text = "Pushing to " + r.name + "...";
+                remote_run_async(repo, state, r.name, "push");
             }
             return true;
         }

@@ -235,13 +235,13 @@ TEST_CASE("remote: list remotes initially empty") {
 
 TEST_CASE("remote: fetch non-existent remote fails") {
     ExtRepo t;
-    auto result = remote_fetch(t.repo.raw(), "nonexistent");
+    auto result = remote_fetch(&t.repo, "nonexistent");
     CHECK(result.is_err());
 }
 
 TEST_CASE("remote: push without remote fails") {
     ExtRepo t;
-    auto result = remote_push(t.repo.raw(), "nonexistent");
+    auto result = remote_push(&t.repo, "nonexistent");
     CHECK(result.is_err());
 }
 
